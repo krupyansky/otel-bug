@@ -1,3 +1,6 @@
+down:
+	docker-compose down --remove-orphans
+
 init:
 	docker-compose up -d --build && go run main.go
 
