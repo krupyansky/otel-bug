@@ -7,6 +7,8 @@ exporters:
   logging:
   prometheus:
     endpoint: "0.0.0.0:8889"
+  prometheusremotewrite:
+    endpoint: "victoriametrics:8428"
 
 processors:
   batch:
@@ -21,5 +23,5 @@ service:
   pipelines:
     metrics:
       receivers: [otlp]
-      exporters: [prometheus, logging]
+      exporters: [prometheus, logging, prometheusremotewrite]
       processors: [batch]

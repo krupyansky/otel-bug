@@ -6,3 +6,6 @@ init:
 
 curl-metrics:
 	curl localhost:8080/metrics
+
+logs-otel:
+	docker-compose logs otel-collector
