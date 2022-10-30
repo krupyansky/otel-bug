@@ -8,7 +8,7 @@ exporters:
   prometheus:
     endpoint: "0.0.0.0:8889"
   prometheusremotewrite:
-    endpoint: "victoriametrics:8428"
+    endpoint: "http://victoriametrics:8428/api/v1/write"
 
 processors:
   batch:

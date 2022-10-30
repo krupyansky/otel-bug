@@ -5,12 +5,15 @@ import (
 	"fmt"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/metric"
+	"go.opentelemetry.io/otel/metric/instrument/syncint64"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"otel-bug/pkg"
 )
+
+var counter syncint64.Counter
 
 func main() {
 	ctx := context.Background()
@@ -21,6 +24,11 @@ func main() {
 	}
 
 	meter := provider.Meter("name")
+
+	counter, err = meter.SyncInt64().Counter("some_counter")
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Start the prometheus HTTP server and pass the exporter Collector to it
 	go serveMetrics(meter)
